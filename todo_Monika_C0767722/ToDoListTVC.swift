@@ -10,6 +10,15 @@ import UIKit
 
 class ToDoListTVC: UITableViewController {
 
+     @IBOutlet weak var searchBar: UISearchBar!
+    
+    var oldTasks: [Task] = []
+    var tasks: [Task] = []
+    var isAsc = true
+    var selectedTask : Task?
+    var isNewTask: Bool = true
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +40,15 @@ class ToDoListTVC: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+          
+           
+       }
+       func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
+          {
+              return true;
+          }
+       
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -87,4 +104,11 @@ class ToDoListTVC: UITableViewController {
     }
     */
 
+    @IBAction func addTask(_ sender: Any) {
+        navigationController?.pushViewController(AddTaskVC.navigateScreen(With: .addTask), animated: true)
+    }
+    @IBAction func sortBtn(_ sender: Any) {
+    }
+    
+   
 }
