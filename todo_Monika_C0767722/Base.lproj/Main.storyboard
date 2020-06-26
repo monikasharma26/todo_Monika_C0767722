@@ -258,6 +258,7 @@
                     <navigationItem key="navigationItem" title="Add new Task" id="5kn-Ls-kM0">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="PW4-0Q-Cbc">
                             <connections>
+                                <action selector="addBtn:" destination="t7t-ce-C4h" id="Bly-X1-JqR"/>
                                 <segue destination="3Gv-yt-Tug" kind="unwind" unwindAction="unwindToHome:" id="Gkk-Vq-e8M"/>
                             </connections>
                         </barButtonItem>

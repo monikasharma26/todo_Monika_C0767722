@@ -31,7 +31,7 @@ class AddTaskVC: UIViewController {
             txtTitle.text = todo.title
             txtTotal.text = "\(todo.totalDays)"
             txtDesc.text = todo.desc
-         //   txtStartDate.text = todo.d
+           txtStartDate.text = "\(String(describing: todo.dateTime))"
         }
     }
 
@@ -44,10 +44,10 @@ class AddTaskVC: UIViewController {
     }
     
     private func initViews() {
-       
+       if let todo = taskToDo { self.todo = todo }
         if(edit == true){
             
-        //   CurDate.text = \"(taskToDo?.dateTime)"
+            CurDate.text = "\(String(describing: taskToDo?.dateTime))"
             txtTitle.text = taskToDo?.title ?? ""
             txtTotal.text = "\(taskToDo?.totalDays ?? 0)"
             
@@ -115,6 +115,64 @@ class AddTaskVC: UIViewController {
            self.view.endEditing(true)
        }
 
+    @IBAction func addBtn(_ sender: Any) {
+        if !txtTitle.hasText {
+                   showAlert(msg: "Please enter title Name")
+               }else if txtDesc.hasText {
+            showAlert(msg: "Please enter Desc")}
+            else if !txtTotal.hasText {
+                   showAlert(msg: "Please enter total number of days")
+               } else if txtTotal.text == "0" {
+                   showAlert(msg: "Total number of days should be greater than zero.")
+               } else if edit == true && Int16((txtTotal.text! as NSString).intValue) < todo!.daysWorked {
+                   showAlert(msg: "Total number of days should be greater than days worked.")
+               } else if !txtStartDate.hasText {
+                   showAlert(msg: "Please Select Start date ")
+               }
+        else {
+                if edit == false {
+                    let todo = TaskToDo(context: persistenceManager.context)
+                    todo.daysWorked = 0
+                    todo.isDone = false
+                    saveCoreData(todo: todo)
+                } else {
+                        persistenceManager.update(type: TaskToDo.self, todo: todo!) { (todoObject) in
+                            if let todo = todoObject as? TaskToDo {
+                                self.saveCoreData(todo: todo)
+                            }
+                        }
+                    }
+                }
+            }
+        
+    
+    
+    private func saveCoreData(todo: TaskToDo) {
+        todo.title = txtTitle.text!
+        todo.totalDays = Int16((txtTotal.text! as NSString).intValue)
+        todo.dateTime = Date()
+        todo.desc = txtDesc.text!
+        todo.isDone = todo.totalDays == todo.daysWorked
+        do {
+            try persistenceManager.context.save()
+            showAlert(msg: "Task Added Successfully")
+            navigationController?.popViewController(animated: true)
+            
+            }catch {
+            print(error.localizedDescription)
+        }
+    }
+    // MARK: - Helper
+    
+     // MARK: - Helper
+     func showAlert(msg: String) {
+         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+          let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(cancelAction)
+                  
+        present(alert, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
