@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE8EFB2824A59C8D0051EE91 /* ToDoListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8EFB2724A59C8D0051EE91 /* ToDoListTVC.swift */; };
+		CE8EFB2A24A5AE3C0051EE91 /* AddTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8EFB2924A5AE3C0051EE91 /* AddTaskVC.swift */; };
 		CEA0115A24A28CE5007DD83C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA0115924A28CE5007DD83C /* AppDelegate.swift */; };
 		CEA0115C24A28CE5007DD83C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA0115B24A28CE5007DD83C /* SceneDelegate.swift */; };
 		CEA0116124A28CE5007DD83C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA0115F24A28CE5007DD83C /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		CE8EFB2724A59C8D0051EE91 /* ToDoListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTVC.swift; sourceTree = "<group>"; };
+		CE8EFB2924A5AE3C0051EE91 /* AddTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVC.swift; sourceTree = "<group>"; };
 		CEA0115624A28CE5007DD83C /* todo_Monika_C0767722.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todo_Monika_C0767722.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA0115924A28CE5007DD83C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEA0115B24A28CE5007DD83C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				CEA0116A24A28CE8007DD83C /* Info.plist */,
 				CEA0116224A28CE5007DD83C /* todo_Monika_C0767722.xcdatamodeld */,
 				CE8EFB2724A59C8D0051EE91 /* ToDoListTVC.swift */,
+				CE8EFB2924A5AE3C0051EE91 /* AddTaskVC.swift */,
 			);
 			path = todo_Monika_C0767722;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			files = (
 				CEA0115A24A28CE5007DD83C /* AppDelegate.swift in Sources */,
 				CEA0116424A28CE5007DD83C /* todo_Monika_C0767722.xcdatamodeld in Sources */,
+				CE8EFB2A24A5AE3C0051EE91 /* AddTaskVC.swift in Sources */,
 				CEA0115C24A28CE5007DD83C /* SceneDelegate.swift in Sources */,
 				CE8EFB2824A59C8D0051EE91 /* ToDoListTVC.swift in Sources */,
 			);
