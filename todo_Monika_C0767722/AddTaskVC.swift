@@ -9,40 +9,111 @@
 import UIKit
 import CoreData
 //Enum For Task
-enum Task: String {
-    case addTask = "Add", editTask = "Edit"
-}
-
-
 class AddTaskVC: UIViewController {
 
+    @IBOutlet var CurDate: UILabel!
     @IBOutlet var txtTitle: UITextField!
     @IBOutlet var txtDesc: UITextField!
+    var edit = Bool()
     @IBOutlet var txtStartDate: UITextField!
     let datePicker = UIDatePicker()
+    @IBOutlet var txtTotal: UITextField!
+    
     var listToDo : ToDoListTVC?
     private var taskToDo: TaskToDo?
-    private var type: Task = .addTask
+   
+    @IBOutlet var saveBtn: UIBarButtonItem!
     private let persistenceManager = PersistenceManager.shared
    
-    class func navigateScreen(With type: Task, and todo: TaskToDo? = nil) -> AddTaskVC {
-           let control = self.navigateScreen as! AddTaskVC
-           control.type = type
-           control.taskToDo = todo
-           return control
-       }
-    
-    
+    private var todo: TaskToDo? {
+        didSet {
+            guard let todo = todo else { return }
+            txtTitle.text = todo.title
+            txtTotal.text = "\(todo.totalDays)"
+            txtDesc.text = todo.desc
+         //   txtStartDate.text = todo.d
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
+        createDatePicker()
+        initViews()
         // Do any additional setup after loading the view.
     }
-    func createDatePicker(){
     
-    //assign datepicker to our textfield
-    txtStartDate.inputView = datePicker
+    private func initViews() {
+       
+        if(edit == true){
+            
+        //   CurDate.text = \"(taskToDo?.dateTime)"
+            txtTitle.text = taskToDo?.title ?? ""
+            txtTotal.text = "\(taskToDo?.totalDays ?? 0)"
+            
+            txtDesc.text = taskToDo?.desc ?? ""
+            
+        }
+        else{
+            
+            let date = Date()
+            // date
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "d MMM"
+            let stDate = dformatter.string(from: date)
+            
+            // day
+            let eformatter = DateFormatter()
+            eformatter.dateFormat = "EEEE"
+            let stDay = eformatter.string(from: date)
+            
+            CurDate.text = currentDate()
+        }
     }
+    func currentDate() -> String{
+          let date = Date()
+          // date
+          let dformatter = DateFormatter()
+          dformatter.dateFormat = "d MMM YY"
+          let stDate = dformatter.string(from: date)
+          
+          // day
+          let eformatter = DateFormatter()
+          eformatter.dateFormat = "EEEE"
+          let stDay = eformatter.string(from: date)
+          
+          return String(format: "%@, %@", stDay, stDate)
+          
+      }
+    func createDatePicker(){
+     //format for datepicker display
+           datePicker.datePickerMode = .date
+           
+           //assign datepicker to our textfield
+           txtStartDate.inputView = datePicker
+           
+           //create a toolbar
+           let toolbar = UIToolbar()
+           toolbar.sizeToFit()
+           
+           //add a done button on this toolbar
+           let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneClicked))
+           
+           toolbar.setItems([doneButton], animated: true)
+           
+           txtStartDate.inputAccessoryView = toolbar
+       }
+    
+    @objc func doneClicked(){
+    
+           //format for displaying the date in our textfield
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateStyle = .medium
+           dateFormatter.timeStyle = .none
+           
+           txtStartDate.text = dateFormatter.string(from: datePicker.date)
+           self.view.endEditing(true)
+       }
 
     /*
     // MARK: - Navigation
