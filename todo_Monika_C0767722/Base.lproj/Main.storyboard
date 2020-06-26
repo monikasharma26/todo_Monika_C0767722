@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3og-Nn-cCA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -28,16 +28,39 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Jgp-EE-3vi">
-                                            <rect key="frame" x="40" y="21" width="59" height="58"/>
+                                            <rect key="frame" x="25" y="21" width="33.5" height="58"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0a-8n-oQ8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0a-8n-oQ8">
                                                     <rect key="frame" x="0.0" y="0.0" width="33.5" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-Fb-UkJ">
-                                                    <rect key="frame" x="0.0" y="43.5" width="59" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-Fb-UkJ">
+                                                    <rect key="frame" x="0.0" y="43.5" width="29" height="14.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14.5" id="tsR-M3-8GP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ZBF-nk-moc">
+                                            <rect key="frame" x="145" y="20" width="57.5" height="60"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jme-Ra-1wy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="35.5" height="36.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBS-e6-MX9">
+                                                    <rect key="frame" x="0.0" y="45.5" width="57.5" height="14.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14.5" id="jcF-qa-TmJ"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -47,14 +70,17 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="5Xv-xD-6eu">
                                             <rect key="frame" x="277" y="21" width="78" height="58"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Working Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApP-vv-gnf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Working Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApP-vv-gnf">
                                                     <rect key="frame" x="0.0" y="0.0" width="78" height="31.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Days Left " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yul-bf-a4N">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days Left " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yul-bf-a4N">
                                                     <rect key="frame" x="0.0" y="43.5" width="78" height="14.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14.5" id="0hf-oF-zMy"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -63,12 +89,15 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="ZBF-nk-moc" secondAttribute="bottom" constant="20" id="0Hj-yw-i3L"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="5Xv-xD-6eu" secondAttribute="bottom" constant="10" id="1On-5x-V8n"/>
                                         <constraint firstItem="5Xv-xD-6eu" firstAttribute="top" secondItem="HOi-Dg-sQ0" secondAttribute="topMargin" constant="10" id="70d-wk-DB4"/>
+                                        <constraint firstItem="ZBF-nk-moc" firstAttribute="top" secondItem="HOi-Dg-sQ0" secondAttribute="top" constant="20" id="Af0-I7-nxh"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="5Xv-xD-6eu" secondAttribute="trailing" constant="20" id="BxS-9k-URN"/>
-                                        <constraint firstItem="Jgp-EE-3vi" firstAttribute="leading" secondItem="HOi-Dg-sQ0" secondAttribute="leadingMargin" constant="20" id="Ek8-Fp-tRI"/>
+                                        <constraint firstItem="Jgp-EE-3vi" firstAttribute="leading" secondItem="HOi-Dg-sQ0" secondAttribute="leadingMargin" constant="5" id="Ek8-Fp-tRI"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Jgp-EE-3vi" secondAttribute="bottom" constant="10" id="J0K-gN-GBF"/>
                                         <constraint firstItem="Jgp-EE-3vi" firstAttribute="top" secondItem="HOi-Dg-sQ0" secondAttribute="topMargin" constant="10" id="LzS-a3-OVs"/>
+                                        <constraint firstItem="ZBF-nk-moc" firstAttribute="leading" secondItem="HOi-Dg-sQ0" secondAttribute="leading" constant="145" id="mbf-5V-aEk"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -81,12 +110,12 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="To Do List" id="fDC-hJ-VE8">
-                        <barButtonItem key="leftBarButtonItem" title="Sort By Name" id="YKp-RE-ehU">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="YKp-RE-ehU">
                             <connections>
                                 <action selector="sortByName:" destination="rrm-Tu-sN1" id="aXM-G2-tTQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add Task" id="EKa-J7-R0T"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add Task" image="plus.rectangle" catalog="system" id="EKa-J7-R0T"/>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="a4p-I7-zmj" id="ri9-tc-Mwr"/>
@@ -115,4 +144,7 @@
             <point key="canvasLocation" x="100.00000000000001" y="103.79464285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus.rectangle" catalog="system" width="128" height="93"/>
+    </resources>
 </document>
