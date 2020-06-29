@@ -13,13 +13,13 @@
         <attribute name="dateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="daysWorked" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="desc" optional="YES" attributeType="String"/>
-        <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="totalDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="taskToDo" inverseEntity="Folder"/>
     </entity>
     <elements>
-        <element name="TaskToDo" positionX="352.328125" positionY="80.26171875" width="128" height="148"/>
         <element name="Folder" positionX="-54" positionY="36" width="128" height="73"/>
+        <element name="TaskToDo" positionX="352.328125" positionY="80.26171875" width="128" height="148"/>
     </elements>
 </model>

@@ -7,109 +7,197 @@
 //
 
 import UIKit
+import CoreData
 
-class ToDoListTVC: UITableViewController {
+var delegate: AppDelegate?
+var context: NSManagedObjectContext?
+var dateFormatter: DateFormatter?
 
-     @IBOutlet weak var searchBar: UISearchBar!
+class ToDoListTVC: UITableViewController, UISearchBarDelegate {
+
+    //  MARK: variables
+   // var toDoListTVC: ToDoListTVC?
+    var oldTasks: [Task] = []
+    var tasks: [Task] = []
+    var isAsc = true
+     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+   
+    var selectedTask : Task?
+    var isNewTask: Bool = true
+     var taskToDo = [TaskToDo]()
+    
+    var selectedFolder: Folder? {
+        didSet {
+            loadNotes()
+        }
+    }
+    // create a context
+   //    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //  MARK: outlets
+    @IBOutlet weak var searchBar: UISearchBar!
     
    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+          searchBar.delegate = self
+        dateFormatter = DateFormatter()
+        dateFormatter!.dateFormat = "dd M, YY"
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(resetFocus))
+        navigationController?.navigationBar.addGestureRecognizer(tap)
+      
+       
     }
+    func loadNotes(with request: NSFetchRequest<TaskToDo> = TaskToDo.fetchRequest(), predicate: NSPredicate? = nil) {
+       //        let request: NSFetchRequest<Note> = Note.fetchRequest()
+               let folderPredicate = NSPredicate(format: "parentFolder.name=%@", selectedFolder!.name!)
+               request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+               if let addtionalPredicate = predicate {
+                   request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [folderPredicate, addtionalPredicate])
+               } else {
+                   request.predicate = folderPredicate
+               }
+               
+               do {
+                taskToDo = try context.fetch(request) 
+               } catch {
+                   print("Error loading notes \(error.localizedDescription)")
+               }
+               
+               tableView.reloadData()
+           }
+    @objc func resetFocus() {
+           searchBar.resignFirstResponder()
+       }
+    
+    //  MARK: sort by title
+    @IBAction func onSortByTitle(_ sender: UIBarButtonItem) {
+        isAsc.toggle()
+        tasks = fetchSavedData(isDate: false, isAsc: isAsc)
+        tableView.reloadData()
+    }
+    
+    //  MARK: sort by date
+    @IBAction func onSortByDate(_ sender: UIBarButtonItem) {
+        isAsc.toggle()
+        tasks = fetchSavedData(isDate: true, isAsc: isAsc)
+        tableView.reloadData()
+    }
+    
+    //  MARK: view will appear
+    override func viewWillAppear(_ animated: Bool) {
+        isNewTask = true
+        tasks = []
+        searchBar.text = ""
+        tasks = fetchSavedData(isAsc: isAsc)
+        tableView.reloadData()
+    }
+    
+    //  MARK: on search
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        tasks = []
+        if !searchText.isEmpty {
+            tasks = fetchSavedData(search: searchText, isAsc: isAsc)
+            tableView.reloadData()
+        }else{
+            tasks = fetchSavedData(isAsc: isAsc)
+        }
+        tableView.reloadData()
+    }
+    
     
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tasks.count
     }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-          
-           
-       }
-       func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool
-          {
-              return true;
-          }
-       
-    /*
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as? TaskTableViewCell{
 
-        // Configure the cell...
+            let position = indexPath.row
+            let task = tasks[position]
+            cell.configureCell(todo: task,searchText: searchBar.searchTextField.text!)
+            return cell
+        }
 
-        return cell
+        return UITableViewCell()
     }
-    */
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @IBAction func addTask(_ sender: Any) {
-       // navigate...
-             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-             let vc = storyboard.instantiateViewController(withIdentifier: "AddTaskVC") as! AddTaskVC
-             vc.edit = false
-             
-             self.navigationController?.pushViewController(vc, animated: true)
-    }
-    @IBAction func sortBtn(_ sender: Any) {
-    }
     
-   
+
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let pos = indexPath.row
+        let task = self.tasks[pos]
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (act, v, nil) in
+            act.backgroundColor = .red
+            self.tasks.remove(at: pos)
+            
+            //  update database
+            deleteTaskData(tasks: [task])
+            
+            tableView.reloadData()
+        }
+        
+        let increase = UIContextualAction(style: .normal, title: "Add a day") { (act, v, nil) in
+            act.backgroundColor = .green
+          
+            task.workeddays = task.workeddays! + 1
+            
+           if task.workeddays! <= task.totalDays!{
+            
+                self.tasks[pos] = task
+                
+                //  update database
+                deleteTaskData(tasks: [task])
+               
+                saveTask(tasks: [task])
+                tableView.reloadData()
+            }
+           
+        }
+        
+        var acts : UISwipeActionsConfiguration?
+       if task.totalDays!  > task.workeddays! {
+         acts = UISwipeActionsConfiguration(actions: [delete,increase])
+        }else{
+           acts = UISwipeActionsConfiguration(actions: [delete])
+        }
+        return acts
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           print("inside prepare")
+           if let addTaskVC = segue.destination as? AddTaskVC {
+               if let cell = sender as? TaskTableViewCell{
+                   addTaskVC.toDoListTVC = self
+                   let pos = tableView.indexPath(for: cell)?.row
+                   selectedTask = tasks[pos!]
+                  
+               }
+               
+           }
+       }
+       
+       
+       @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
+           let sourceViewController = unwindSegue.source
+           // Use data from the view controller which initiated the unwind segue
+           
+       }
+
 }
+   
+
+

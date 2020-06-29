@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-class PersistenceManager {
+/*class PersistenceManager {
     
     private init() {}
     
@@ -123,3 +123,4 @@ class PersistenceManager {
         }
         
     }
+*/
