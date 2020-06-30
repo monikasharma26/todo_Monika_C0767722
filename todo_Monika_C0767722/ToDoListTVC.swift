@@ -15,7 +15,7 @@ var dateFormatter: DateFormatter?
 
 class ToDoListTVC: UITableViewController, UISearchBarDelegate {
 
-    //  MARK: variables
+   /* //  MARK: variables
    // var toDoListTVC: ToDoListTVC?
     var oldTasks: [Task] = []
     var tasks: [Task] = []
@@ -181,7 +181,7 @@ class ToDoListTVC: UITableViewController, UISearchBarDelegate {
            print("inside prepare")
            if let addTaskVC = segue.destination as? AddTaskVC {
                if let cell = sender as? TaskTableViewCell{
-                   addTaskVC.toDoListTVC = self
+                 //  addTaskVC.toDoListTVC = self
                    let pos = tableView.indexPath(for: cell)?.row
                    selectedTask = tasks[pos!]
                   
@@ -198,6 +198,8 @@ class ToDoListTVC: UITableViewController, UISearchBarDelegate {
        }
 
 }
-   
+   */
+
+}
 
 

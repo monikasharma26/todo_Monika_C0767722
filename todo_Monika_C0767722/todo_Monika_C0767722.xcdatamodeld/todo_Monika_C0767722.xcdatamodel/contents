@@ -10,12 +10,12 @@
         </uniquenessConstraints>
     </entity>
     <entity name="TaskToDo" representedClassName="TaskToDo" syncable="YES" codeGenerationType="class">
-        <attribute name="dateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="daysWorked" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="desc" optional="YES" attributeType="String"/>
-        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="totalDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="desc" attributeType="String"/>
+        <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="totalDays" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="taskToDo" inverseEntity="Folder"/>
     </entity>
     <elements>

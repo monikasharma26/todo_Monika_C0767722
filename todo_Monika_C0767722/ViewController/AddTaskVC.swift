@@ -11,8 +11,11 @@ import CoreData
 //Enum For Task
 class AddTaskVC: UIViewController {
 
-    var toDoListTVC: ToDoListTVC?
+   
+      var taskToDo: TaskToDo?
+  
     var pickDate : Date?
+     var delegate: TasksTODoViewController?
     @IBOutlet var txttitle: UITextField!
     
     @IBOutlet var txtDesc: UITextField!
@@ -33,12 +36,16 @@ class AddTaskVC: UIViewController {
         createDatePicker()
         let tap = UITapGestureRecognizer(target: self, action: #selector(resetFocus))
         view.addGestureRecognizer(tap)
-        if let toDoListTVC = toDoListTVC{
+       
+        if let toDoListTVC = taskToDo{
             btnSave.title = "Update"
-            let task = toDoListTVC.selectedTask
-            txttitle.text = task?.title
-            txtDesc.text = task?.desc
-            startDate.text = "\(String(describing: task!.dateTime!))"
+           // let task = toDoListTVC.selectedTask
+            txttitle.text = toDoListTVC.title
+            txtDesc.text = toDoListTVC.desc
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "MMM d,YYYY"
+            let stDate = dformatter.string(from: toDoListTVC.dateTime!)
+            startDate.text = stDate
           //  endDate.text = "\(String(describing: task?.totalDays))"
             
           
@@ -109,50 +116,41 @@ class AddTaskVC: UIViewController {
         
     }
     
+   @IBAction func saveTask(_ sender: Any) {
+          if(validations())
+          {
+              if taskToDo == nil
+              {
+                delegate?.saveTask(title: txttitle.text!, desc: txtDesc.text!, endDate: datePicker.date)
+                  
+              }
+              else
+              {
+                taskToDo?.title = txttitle!.text!
+                taskToDo?.desc = txtDesc.text
+                taskToDo?.dateTime = datePicker.date
+                delegate?.updateTask()
+              }
+              navigationController?.popViewController(animated: true)
+          }
+      }
+    
+
+    
+
    
-    
-    override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
-        let date = Date()
-        // date
-       
-        let diff = Calendar.current.dateComponents([.day], from: Date(), to: datePicker.date)
-        print("\(diff.day!)")
-      
-        let task = Task(title: txttitle.text, desc: txtDesc.text, dateTime: datePicker.date, workeddays: 0, totalDays: Int(diff.day!))
-        
-    
-        
-        if let toDoListTVC = toDoListTVC{
-            deleteTaskData(tasks: [toDoListTVC.selectedTask!])
-            toDoListTVC.selectedTask = nil
-            toDoListTVC.isNewTask = true
-            
-        }
-        
-        saveTask(tasks: [task])
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    func validations() -> Bool {
         if (txttitle.text!.isEmpty) || (txtDesc.text!.isEmpty) {
-            
-            let alert = UIAlertController(title: "Empty field!", message: "Please enter data to save...", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (act) in
-                alert.dismiss(animated: true, completion: nil)
-            }))
-            
-            present(alert, animated: true, completion: nil)
-            return false
-        }
-        if(!txttitle.text!.isEmpty && toDoListTVC == nil && !fetchSavedData(search: txttitle.text!, isSame: true).isEmpty) {
-        let alert = UIAlertController(title: "Same title!", message: "Can't have same titles", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (act) in
-                alert.dismiss(animated: true, completion: nil)
-            }))
-            
-            present(alert, animated: true, completion: nil)
-            return false
-        }
-        return true
+                   
+                   let alert = UIAlertController(title: "Empty field!", message: "Please enter data to save...", preferredStyle: .actionSheet)
+                   alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (act) in
+                       alert.dismiss(animated: true, completion: nil)
+                   }))
+                   
+                   present(alert, animated: true, completion: nil)
+                   return false
+               }
+               return true
     }
     
    
