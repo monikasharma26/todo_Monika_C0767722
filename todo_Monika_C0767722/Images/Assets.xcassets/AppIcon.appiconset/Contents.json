@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "logo.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
