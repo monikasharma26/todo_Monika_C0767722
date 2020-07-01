@@ -82,7 +82,7 @@ extension CategoryViewController {
             try categoryContext.save()
             tableView.reloadData()
         } catch {
-            print(\(error.localizedDescription))
+            print((error.localizedDescription))
         }
     }
     
@@ -94,7 +94,7 @@ extension CategoryViewController {
         do {
             category = try categoryContext.fetch(request)
         } catch {
-            print(\(error.localizedDescription))
+            print((error.localizedDescription))
         }
         tableView.reloadData()
         
@@ -111,7 +111,7 @@ extension CategoryViewController {
             try categoryContext.save()
             tableView.reloadData()
         } catch {
-            print(\(error.localizedDescription))
+            print((error.localizedDescription))
         }
         
     }

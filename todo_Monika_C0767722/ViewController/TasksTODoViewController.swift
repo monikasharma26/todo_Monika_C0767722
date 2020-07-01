@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+
 class TasksTODoViewController: UIViewController{
 
 var selectedSort = 0
