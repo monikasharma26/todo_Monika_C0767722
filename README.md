@@ -23,7 +23,6 @@ Screenshot | Screen Description
 <img src="https://s7.gifyu.com/images/ListTask.png"/> |ADDED TASK LIST
 <img src="https://s7.gifyu.com/images/Simulator-Screen-Shot---iPhone-SE-2nd-generation---2020-07-01-at-23.44.05.png"/> | Add Day/Delete
 <img src="https://s7.gifyu.com/images/Move.png"/> | Move/Complete Task
-<img src="https://s7.gifyu.com/images/archieveTask.png"/> | Move Task t0 Archive
 <img src="https://s7.gifyu.com/images/sq.png"/> | Move Task to Archive
 <img src="https://s7.gifyu.com/images/Tass1.png"/> | NotiFication Screen
 <img src="https://s7.gifyu.com/images/tas222.png"/> | NotiFication Screen
