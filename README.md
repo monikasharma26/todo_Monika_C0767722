@@ -4,7 +4,7 @@
 ### Monika Sharma
 
 # PROJECT DESCRIPTION
-### Add new Folder  and Task of a user.View all the added user details.
+### Add new Folder  and Task of a user.View all the added task details.
 ## PROJECT OUTPUT
 Screenshot | Screen Description
 --- | ---
