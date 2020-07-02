@@ -185,10 +185,12 @@ extension CategoryViewController {
     func setUpNotifications() {
         
         checkDueDates()
+        print("tetettet\(notificationArray.count)")
         if notificationArray.count > 0 {
             for task in notificationArray {
                 
                 if let taskname = task.title {
+                    print("TaskN NAme is \(taskname)")
                     let notificationCenter = UNUserNotificationCenter.current()
                     let notificationContent = UNMutableNotificationContent()
                     
@@ -198,12 +200,14 @@ extension CategoryViewController {
                     let fromDate = Calendar.current.date(byAdding: .day, value: -1, to: task.dateTime!)!
                     let components = Calendar.current.dateComponents([.month, .day, .year], from: fromDate)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                    print("dsddsd \(trigger)")
                     let request = UNNotificationRequest(identifier: "\(taskname)", content: notificationContent, trigger: trigger)
                     notificationCenter.add(request) { (error) in
                         if error != nil {
-                            print(error!)
+                            print("test error is \(error!)")
                         }
                     }
+                    print("Notoificacac Request \(request)")
                 }
             }
         }
@@ -219,6 +223,7 @@ extension CategoryViewController {
             for task in notifications {
                 if Calendar.current.isDateInTomorrow(task.dateTime!) {
                     notificationArray.append(task)
+                    print("Notofication DUE Date \(notificationArray.count)")
                 }
             }
         } catch {
