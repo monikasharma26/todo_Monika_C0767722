@@ -23,7 +23,7 @@ Screenshot | Screen Description
 <img src="https://s7.gifyu.com/images/Simulator-Screen-Shot---iPhone-SE-2nd-generation---2020-07-01-at-23.44.05.png"/> | Add Day/Delete
 <img src="https://s7.gifyu.com/images/Move.png"/> | Move/Complete Task
 <img src="https://s7.gifyu.com/images/sq.png"/> | Move Task to Archive
-<img src=""/> | NotiFication Screen
+<img src="https://s7.gifyu.com/images/Notification18620f423692877ed.png"/> | NotiFication Screen
 <img src="https://s7.gifyu.com/images/Notofication2.png"/> | NotiFication Screen
 
 ## REFERENCES
