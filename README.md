@@ -19,13 +19,12 @@ Screenshot | Screen Description
  <img src="https://s7.gifyu.com/images/categoryDelete.png"/> | CateGory Delete
 <img src="https://s7.gifyu.com/images/Test12.png"/> | Task Details screen for the app.
 <img src="https://s7.gifyu.com/images/OverrDueTask.png"/> |OverDueTask Screen RED Cell With overdue task
-<img src="https://s7.gifyu.com/images/Simulator-Screen-Shot---iPhone-SE-2nd-generation---2020-07-01-at-23.37.5579b468d64aa8af0e.png"/> | DueTAsk Screen -- Green Cell With overdue task
 <img src="https://s7.gifyu.com/images/ListTask.png"/> |ADDED TASK LIST
 <img src="https://s7.gifyu.com/images/Simulator-Screen-Shot---iPhone-SE-2nd-generation---2020-07-01-at-23.44.05.png"/> | Add Day/Delete
 <img src="https://s7.gifyu.com/images/Move.png"/> | Move/Complete Task
 <img src="https://s7.gifyu.com/images/sq.png"/> | Move Task to Archive
-<img src="https://s7.gifyu.com/images/Tass1.png"/> | NotiFication Screen
-<img src="https://s7.gifyu.com/images/tas222.png"/> | NotiFication Screen
+<img src=""/> | NotiFication Screen
+<img src="https://s7.gifyu.com/images/Notofication2.png"/> | NotiFication Screen
 
 ## REFERENCES
 * https://www.ioscreator.com/tutorials/local-notification-ios-tutorial --- Notofication
