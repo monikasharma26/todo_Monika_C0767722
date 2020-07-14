@@ -12,8 +12,9 @@ import UserNotifications
 
 class CategoryViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+  //  @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet var tableView: UITableView!
     var categoryContext: NSManagedObjectContext!
     var notificationArray = [TaskToDo]()
     
@@ -33,21 +34,24 @@ class CategoryViewController: UIViewController {
         setUpNotifications()
     }
     
+    @IBAction func addFolder(_ sender: Any) {
+        let alert = UIAlertController(title: "Add a new category", message: "", preferredStyle: .alert)
+              alert.addTextField(configurationHandler: addCategoryName(textField:))
+              alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
+                  if(self.categoryName.text!.count < 1) {
+                      self.customeShowAlert()
+                      return
+                  }
+                  else {
+                      self.addNewCategory()
+                  }
+              }))
+              alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+              self.present(alert, animated: true, completion: nil)
+    }
     @IBAction func addCategory(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Add a new category", message: "", preferredStyle: .alert)
-        alert.addTextField(configurationHandler: addCategoryName(textField:))
-        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
-            if(self.categoryName.text!.count < 1) {
-                self.customeShowAlert()
-                return
-            }
-            else {
-                self.addNewCategory()
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+      
 
     }
     
@@ -144,15 +148,19 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return category.count
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+      //  let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! FolderTableViewCell
+        
         let cat = category[indexPath.row]
         if cat.name == "Archive" {
-            cell.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         }
-        cell.textLabel?.text = cat.name
-        
+      //  cell.textLabel?.text = cat.name
+         cell.setDisplay(customer: cat)
         return cell
     }
     
@@ -175,9 +183,9 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "TaskToDoSegue", sender: self)
-    }
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      // performSegue(withIdentifier: "TaskToDoSegue", sender: self)
+   }
 }
 
 

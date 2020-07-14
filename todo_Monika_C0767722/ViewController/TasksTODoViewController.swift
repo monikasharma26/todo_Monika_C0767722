@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TasksTODoViewController: UIViewController{
+class TasksTODoViewController: UIViewController,UISearchBarDelegate {
 
 var selectedSort = 0
     
@@ -18,6 +18,7 @@ var selectedSort = 0
             loadTask()
         }
     }
+    @IBOutlet var toolbar: UIToolbar!
     var categoryName: String!
     let todoListContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var tasksArray = [TaskToDo]()
@@ -34,7 +35,10 @@ var selectedSort = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
+        toolbar.isHidden = true
         setUpTableView()
+        
     }
     @IBAction func sort(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -47,7 +51,8 @@ var selectedSort = 0
               }
               
               loadTask()
-              tblView.reloadData()
+        
+           tblView.reloadData()
     }
     
     @IBAction func addTask(_ sender: Any) {
@@ -67,11 +72,46 @@ var selectedSort = 0
         }
         
     }
+    @IBAction func backbtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func unwindTaskToDO(_ unwindSegue: UIStoryboardSegue) {
            saveTask()
            loadTask()
            tblView.reloadData()
        }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+                   
+           let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+           loadTask(predicate: predicate)
+           tblView.reloadData()
+       }
+       
+       func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+           if searchBar.text?.count == 0 {
+               loadTask()
+
+               DispatchQueue.main.async {
+                   searchBar.resignFirstResponder()
+               }
+
+           }
+           loadTask()
+           tblView.reloadData()
+       }
+       
+       
+       
+       func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+           loadTask()
+           DispatchQueue.main.async {
+               searchBar.resignFirstResponder()
+           }
+           tblView.reloadData()
+           searchBar.resignFirstResponder()
+       }
+   
 }
 
 
@@ -79,7 +119,7 @@ extension TasksTODoViewController {
     
     func loadTask(with request: NSFetchRequest<TaskToDo> = TaskToDo.fetchRequest(), predicate: NSPredicate? = nil) {
         
-        let sortBy = ["dateTime", "title"]
+        let sortBy = ["desc","title"]
         let todoPredicate = NSPredicate(format: "parentFolder.name=%@", selectedCategory!.name!)
         request.sortDescriptors = [NSSortDescriptor(key: sortBy[selectedSort], ascending: true)]
         if let addtionalPredicate = predicate {
@@ -148,6 +188,11 @@ extension TasksTODoViewController {
         selectedTodo = nil
     }
     
+    func search()
+    {
+        
+    }
+  
 }
 
 
@@ -169,13 +214,19 @@ extension TasksTODoViewController: UITableViewDelegate, UITableViewDataSource {
         let task = tasksArray[indexPath.row]
         cell.textLabel?.text = task.title
         cell.detailTextLabel?.text = task.desc
-        if (task.dateTime! < Date() && task.parentFolder?.name != "Archive") {
+    
+        if (Calendar.current.isDateInYesterday(task.dateTime!) && task.parentFolder?.name != "Archive") {
             cell.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
         }
-        if (Calendar.current.isDateInToday(task.dateTime!) && task.parentFolder?.name != "Archive") {
+       else if (Calendar.current.isDateInToday(task.dateTime!) || Calendar.current.isDateInTomorrow(task.dateTime!) && task.parentFolder?.name != "Archive") {
             cell.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         }
-
+        else{
+            cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
+       
+        if(tasksArray.count != 0){
+            toolbar.isHidden = false}
         return cell
     }
     
@@ -192,6 +243,7 @@ extension TasksTODoViewController: UITableViewDelegate, UITableViewDataSource {
         self.tasksArray[indexPath.row].dateTime =
                             self.tasksArray[indexPath.row].dateTime?.addingTimeInterval(24*60*60)
             self.updateTask()
+            
             //print("sss\(self.tasksArray[indexPath.row].dateTime)")
             completion(true)
         }
@@ -222,40 +274,9 @@ extension TasksTODoViewController: UITableViewDelegate, UITableViewDataSource {
         selectedTodo = tasksArray[indexPath.row]
         performSegue(withIdentifier: "addTaskSegue", sender: self)
     }
+    
 }
 
-extension TasksTODoViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-                
-        let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
-        loadTask(predicate: predicate)
-        tblView.reloadData()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
-            loadTask()
 
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-
-        }
-        loadTask()
-        tblView.reloadData()
-    }
-    
-    
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        loadTask()
-        DispatchQueue.main.async {
-            searchBar.resignFirstResponder()
-        }
-        tblView.reloadData()
-        searchBar.resignFirstResponder()
-    }
-}
 
 

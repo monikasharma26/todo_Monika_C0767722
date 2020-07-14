@@ -86,7 +86,7 @@ class AddTaskVC: UIViewController {
      
             //format for datepicker display
             datePicker.datePickerMode = .date
-            datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+           datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
             //assign datepicker to our textfield
             startDate.inputView = datePicker
        
@@ -135,9 +135,11 @@ class AddTaskVC: UIViewController {
           }
       }
     
-
+    @IBAction func backbtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
-
+    
    
     func validations() -> Bool {
         if (txttitle.text!.isEmpty) || (txtDesc.text!.isEmpty) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3F941C24AD6E2D0033CA92 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F941B24AD6E2D0033CA92 /* FolderTableViewCell.swift */; };
 		CE8296EC24AA3A210008C736 /* MoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8296EB24AA3A210008C736 /* MoveViewController.swift */; };
 		CE8296EE24AA3AFC0008C736 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8296ED24AA3AFC0008C736 /* CategoryViewController.swift */; };
 		CE8296F024AA3D6E0008C736 /* TasksTODoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8296EF24AA3D6E0008C736 /* TasksTODoViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE3F941B24AD6E2D0033CA92 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		CE8296EB24AA3A210008C736 /* MoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewController.swift; sourceTree = "<group>"; };
 		CE8296ED24AA3AFC0008C736 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		CE8296EF24AA3D6E0008C736 /* TasksTODoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTODoViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				CE8296ED24AA3AFC0008C736 /* CategoryViewController.swift */,
 				CE8296EF24AA3D6E0008C736 /* TasksTODoViewController.swift */,
 				CEA0116724A28CE8007DD83C /* LaunchScreen.storyboard */,
+				CE3F941B24AD6E2D0033CA92 /* FolderTableViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				CE8EFB3324A5E5F20051EE91 /* UITextField.swift in Sources */,
 				CE8296F024AA3D6E0008C736 /* TasksTODoViewController.swift in Sources */,
 				CE8296EC24AA3A210008C736 /* MoveViewController.swift in Sources */,
+				CE3F941C24AD6E2D0033CA92 /* FolderTableViewCell.swift in Sources */,
 				CEA0116424A28CE5007DD83C /* todo_Monika_C0767722.xcdatamodeld in Sources */,
 				CE8EFB2A24A5AE3C0051EE91 /* AddTaskVC.swift in Sources */,
 				CEA0115C24A28CE5007DD83C /* SceneDelegate.swift in Sources */,
